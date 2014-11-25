@@ -234,7 +234,7 @@ void gl_noop() {
 // ----------------------------------------------------------------------------
 
 void setGlThreadSpecific(gl_hooks_t const *value) {
-    gl_hooks_t const * volatile * tls_hooks = get_tls_hooks();
+    gl_hooks_t const * volatile * tls_hooks = const_cast<gl_hooks_t const **>(reinterpret_cast<gl_hooks_t**>(__get_tls_hooks()));
     tls_hooks[TLS_SLOT_OPENGL_API] = value;
 }
 
